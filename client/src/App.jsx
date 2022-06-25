@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Button from "react-bootstrap/Button";
 import JankenGameContract from "./contracts/JankenGame.json";
 import getWeb3 from "./getWeb3";
 
@@ -164,7 +165,7 @@ class App extends Component {
         <input onChange={this.handleChangePodAddress} value={this.state.podAddress}/>
         <b>PodSize:</b>
         <input onChange={this.handleChangePlayerPodSize} value={this.state.playerPodSize}/> ether.
-        <button onClick={this.handleClickPodSend}>ポッドへ送る</button>
+        <Button onClick={this.handleClickPodSend}>ポッドへ送る</Button>
 
         <h5>Player1</h5>
         <select value={this.state.playerHand1} onChange={this.handleChangePlayerHand1}>
@@ -179,10 +180,10 @@ class App extends Component {
           <option value="P">P</option>
         </select>
         <h5>Action</h5>
-        <button onClick={this.handleSubmitPlayerHand1}>Player1のハンド設定</button>
-        <button onClick={this.handleSubmitPlayerHand2}>Player2のハンド設定</button>
-        <button onClick={this.handleSubmitCalcGame}>ゲーム実行</button>
-        <button onClick={this.handleUpdateHands}>Update</button>
+        <Button onClick={this.handleSubmitPlayerHand1}>Player1のハンド設定</Button>
+        <Button onClick={this.handleSubmitPlayerHand2}>Player2のハンド設定</Button>
+        <Button onClick={this.handleSubmitCalcGame}>ゲーム実行</Button>
+        <Button onClick={this.handleUpdateHands}>Update</Button>
 
       </div>
     );
