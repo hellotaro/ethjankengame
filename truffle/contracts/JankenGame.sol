@@ -18,6 +18,7 @@ contract JankenGame {
     uint16 playerId1;
     uint16 playerId2;
     uint16 podSize;
+    address podAddress;
 
     JankenGameLog[] JankenGameLogs;
 
@@ -42,6 +43,9 @@ contract JankenGame {
     }
     function setPodSize(uint16 _podSize) public {
         podSize = _podSize;
+    }
+    function setPodSize(address _podAddress) public {
+        podAddress = _podAddress;
     }
     function calcGame() public {
         if(compareStrings(playerHand1, playerHand2)) {

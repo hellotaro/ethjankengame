@@ -1,5 +1,9 @@
 import React, { Component } from "react";
+import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import JankenGameContract from "./contracts/JankenGame.json";
 import getWeb3 from "./getWeb3";
 
@@ -11,7 +15,7 @@ class App extends Component {
     playerId1: 1, playerId2: 2,
     playerHand1: "G", playerHand2: "G",
     podAddress: "0x619CE08A99B863Ba3D899506A4840F72711F1842",
-    playerPodSize: "0",
+    playerPodSize: "5",
   };
 
   componentDidMount = async () => {
@@ -158,32 +162,54 @@ class App extends Component {
     }
     return (
       <div className="App">
-        
-        <h1>ジャンケン</h1>
+        <h1>ジャンケンゲーム</h1>
         <h3>ポッドへ送信</h3>
-        <b>PodAddress:</b>
-        <input onChange={this.handleChangePodAddress} value={this.state.podAddress}/>
-        <b>PodSize:</b>
-        <input onChange={this.handleChangePlayerPodSize} value={this.state.playerPodSize}/> ether.
-        <Button onClick={this.handleClickPodSend}>ポッドへ送る</Button>
+        <Form>
+          <Col xs={6} sm={6} md={4} lg={3}>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Label>ポッドウォレットアドレス</Form.Label>
+              <Form.Control type="text" placeholder="ポッドのアドレスを指定" onChange={this.handleChangePodAddress} value={this.state.podAddress}  />
+              <Form.Text className="text-muted">
+                資金を送るためのポッドのアドレスを記入
+              </Form.Text>
+            </Form.Group>
+          </Col>
+          <Col xs={6} sm={6} md={4} lg={3}>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Label>送るEthサイズを指定</Form.Label>
+              <Form.Control type="text" placeholder="ポッドへ送るEthサイズ" onChange={this.handleChangePlayerPodSize} value={this.state.playerPodSize}  />
+              <Form.Text className="text-muted">
+                ポッドへ送るEthを指定
+              </Form.Text>
+            </Form.Group>
+          </Col>
+          <Button onClick={this.handleClickPodSend}>ポッドへ送る</Button>
+        </Form>
 
-        <h5>Player1</h5>
-        <select value={this.state.playerHand1} onChange={this.handleChangePlayerHand1}>
-          <option value="G">G</option>
-          <option value="C">C</option>
-          <option value="P">P</option>
-        </select>
-        <h5>Player2</h5>
-        <select value={this.state.playerHand2} onChange={this.handleChangePlayerHand2}>
-          <option value="G">G</option>
-          <option value="C">C</option>
-          <option value="P">P</option>
-        </select>
-        <h5>Action</h5>
-        <Button onClick={this.handleSubmitPlayerHand1}>Player1のハンド設定</Button>
-        <Button onClick={this.handleSubmitPlayerHand2}>Player2のハンド設定</Button>
+        <h3>プレーヤーのハンドを選択</h3>
+        <Form>
+          <Col xs={6} sm={6} md={4} lg={3}>
+            <b>Player1:</b>
+            <Form.Select aria-label="player1 hand" value={this.state.playerHand1} onChange={this.handleChangePlayerHand1}>
+              <option value="G">G</option>
+              <option value="C">C</option>
+              <option value="P">P</option>
+            </Form.Select>
+          </Col>
+          <Col xs={6} sm={6} md={4} lg={3}>
+            <b>Player2:</b>
+            <Form.Select aria-label="player2 hand" value={this.state.playerHand2} onChange={this.handleChangePlayerHand2}>
+              <option value="G">G</option>
+              <option value="C">C</option>
+              <option value="P">P</option>
+            </Form.Select>
+          </Col>
+        </Form>
+        
+        <Button variant="secondary" onClick={this.handleSubmitPlayerHand1}>Player1のハンド設定</Button>
+        <Button variant="secondary" onClick={this.handleSubmitPlayerHand2}>Player2のハンド設定</Button>
         <Button onClick={this.handleSubmitCalcGame}>ゲーム実行</Button>
-        <Button onClick={this.handleUpdateHands}>Update</Button>
+        <Button variant="secondary" onClick={this.handleUpdateHands}>Update</Button>
 
       </div>
     );
